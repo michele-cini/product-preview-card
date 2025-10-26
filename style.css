@@ -7,67 +7,80 @@
   --gray: hsl(228, 12%, 48%);
   --cream: hsl(30, 38%, 92%);
   --white: hsl(0, 0%, 100%);
+
+  --min-picture-width: 18.5rem;
+  --picture-width: clamp(var(--min-picture-width), 21vw, 100vw);
+  --picture-aspect-ratio: 2/3;
+  --article-width: var(--picture-width);
 }
 
 body {
   background-color: var(--cream);
   min-height: 100vh;
+  min-width: 20rem;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
   font-family: "Montserrat", sans-serif;
   color: var(--gray);
 }
 
-p {
-  font-size: 0.875rem;
-}
-
 main {
   background-color: var(--white);
-  width: 93%;
+  width: 85vw;
   border-radius: 0.5em;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
 
 article {
-  padding: 2em;
+  container-type: inline-size;
+  width: 100%;
 }
 
-h1 {
+article section {
+  font-size: 4.5cqi;
+  padding: 9cqi;
+}
+
+article p {
+  font-size: 4cqi;
+}
+
+article h1 {
   font-family: "Fraunces", serif;
-  font-size: 2rem;
+  font-size: 9cqi;
   line-height: 1em;
   margin: 0.75em 0;
   color: var(--black);
 }
 
-.perfume {
+article .perfume {
   font-size: 85%;
   text-transform: uppercase;
   letter-spacing: 0.4em;
 }
 
-.prices {
+article .prices {
   margin: 1em 0;
   display: flex;
   align-items: center;
 }
 
-.large {
-  font-size: 2rem;
+article .large {
+  font-size: 9cqi;
   margin-right: 0.5em;
   font-family: "Fraunces", serif;
   font-weight: 700;
   color: var(--green-500);
 }
 
-.little {
-  font-size: 0.8rem;
+article .little {
+  font-size: 3.6cqi;
 }
 
-button {
+article button {
   border: none;
   display: flex;
   justify-content: center;
@@ -81,14 +94,65 @@ button {
   color: var(--white);
 }
 
-button::before {
-    content: "";
-    width: 1em;
-    height: 1em;
-    background: url(images/icon-cart.svg) no-repeat center/contain;
+article button::before {
+  content: "";
+  width: 1em;
+  height: 1em;
+  background: url(images/icon-cart.svg) no-repeat center/contain;
 }
 
-button:hover {
-    background-color: var(--green-700);
-    cursor: pointer;
+article button:hover {
+  background-color: var(--green-700);
+  cursor: pointer;
+}
+
+@media screen and (min-width: 40em) {
+  main {
+    flex-direction: row;
+    width: fit-content;
+    height: calc(var(--picture-width) / (var(--picture-aspect-ratio)));
+  }
+
+  main picture {
+    width: var(--picture-width);
+  }
+
+  main picture img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    display: block;
+  }
+
+  main article {
+    width: var(--article-width);
+    height: 100%;
+  }
+
+  article section {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 100%;
+    font-size: 5.5cqi;
+    padding: 11cqi;
+    padding-right: 13.75cqi;
+    overflow: scroll;
+  }
+
+  article h1 {
+    font-size: 11cqi;
+  }
+
+  article p {
+    font-size: 4.5cqi;
+  }
+
+  article .large {
+    font-size: 11cqi;
+  }
+
+  article .little {
+    font-size: 4.4cqi;
+  }
 }
